@@ -6,7 +6,7 @@
 * Itagaki Fumihiko 26-Dec-93  Add -l and -n.
 * 1.1
 *
-* Usage: split [ -clnvZ ] [ -<N>[ckl] ] [ -- ] [ <ƒtƒ@ƒCƒ‹> [ <o—Íƒx[ƒX–¼> ] ]
+* Usage: split [ -clnvZ ] [ -<N>[ckl] ] [ -- ] [ <ãƒ•ã‚¡ã‚¤ãƒ«> [ <å‡ºåŠ›ãƒ™ãƒ¼ã‚¹å> ] ]
 
 .include doscall.h
 .include error.h
@@ -23,7 +23,7 @@
 .xref memmovi
 .xref strip_excessive_slashes
 
-REQUIRED_OSVER	equ	$200			*  2.00ˆÈ~
+REQUIRED_OSVER	equ	$200			*  2.00ä»¥é™
 
 DEFAULT_COUNT	equ	1000
 
@@ -49,12 +49,12 @@ start:
 		dc.b	'#HUPAIR',0
 start1:
 		lea	bsstop(pc),a6
-		lea	stack_bottom(a6),a7	*  A7 := ƒXƒ^ƒbƒN‚Ì’ê
+		lea	stack_bottom(a6),a7	*  A7 := ã‚¹ã‚¿ãƒƒã‚¯ã®åº•
 		DOS	_VERNUM
 		cmp.w	#REQUIRED_OSVER,d0
 		bcs	dos_version_mismatch
 
-		lea	$10(a0),a0			*  A0 : PDBƒAƒhƒŒƒX
+		lea	$10(a0),a0			*  A0 : PDBã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a7,d0
 		sub.l	a0,d0
 		move.l	d0,-(a7)
@@ -64,23 +64,23 @@ start1:
 	*
 		move.l	#-1,stdin(a6)
 	*
-	*  ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚ğŠm•Û‚·‚é
+	*  å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã‚’ç¢ºä¿ã™ã‚‹
 	*
-		lea	1(a2),a0			*  A0 := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ìæ“ªƒAƒhƒŒƒX
-		bsr	strlen				*  D0.L := ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì•¶š—ñ‚Ì’·‚³
+		lea	1(a2),a0			*  A0 := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+		bsr	strlen				*  D0.L := ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®æ–‡å­—åˆ—ã®é•·ã•
 		addq.l	#1,d0
 		bsr	malloc
 		bmi	insufficient_memory
 
-		movea.l	d0,a1				*  A1 := ˆø”•À‚ÑŠi”[ƒGƒŠƒA‚Ìæ“ªƒAƒhƒŒƒX
+		movea.l	d0,a1				*  A1 := å¼•æ•°ä¸¦ã³æ ¼ç´ã‚¨ãƒªã‚¢ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 	*
-	*  ˆø”‚ğƒfƒR[ƒh‚µC‰ğß‚·‚é
+	*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã—ï¼Œè§£é‡ˆã™ã‚‹
 	*
-		moveq	#0,d6				*  D6.W : ƒGƒ‰[EƒR[ƒh
-		bsr	DecodeHUPAIR			*  ˆø”‚ğƒfƒR[ƒh‚·‚é
-		movea.l	a1,a0				*  A0 : ˆø”ƒ|ƒCƒ“ƒ^
-		move.l	d0,d7				*  D7.L : ˆø”ƒJƒEƒ“ƒ^
-		moveq	#0,d5				*  D5.B : ƒtƒ‰ƒO
+		moveq	#0,d6				*  D6.W : ã‚¨ãƒ©ãƒ¼ãƒ»ã‚³ãƒ¼ãƒ‰
+		bsr	DecodeHUPAIR			*  å¼•æ•°ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹
+		movea.l	a1,a0				*  A0 : å¼•æ•°ãƒã‚¤ãƒ³ã‚¿
+		move.l	d0,d7				*  D7.L : å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
+		moveq	#0,d5				*  D5.B : ãƒ•ãƒ©ã‚°
 		move.l	#DEFAULT_COUNT,count(a6)
 decode_opt_loop1:
 		tst.l	d7
@@ -188,7 +188,7 @@ bad_count:
 
 decode_opt_done:
 	*
-	*  -1c ‚Å‚Í -n ‚ğ–³Œø‚Æ‚·‚é
+	*  -1c ã§ã¯ -n ã‚’ç„¡åŠ¹ã¨ã™ã‚‹
 	*
 		cmp.l	#2,count(a6)
 		bhs	option_n_ok
@@ -196,7 +196,7 @@ decode_opt_done:
 		bclr	#FLAG_n,d5
 option_n_ok:
 	*
-	*  “ü—Íƒoƒbƒtƒ@‚Æ‚µ‚ÄÅ‘åƒƒ‚ƒŠ‚ğŠm•Û‚·‚é
+	*  å…¥åŠ›ãƒãƒƒãƒ•ã‚¡ã¨ã—ã¦æœ€å¤§ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿ã™ã‚‹
 	*
 		move.l	#$00ffffff,d0
 		bsr	malloc
@@ -211,20 +211,20 @@ option_n_ok:
 		move.l	d0,inpbuf_top(a6)
 		move.l	d0,data_top(a6)
 	*
-	*  •W€“ü—Í‚ğØ‚è‘Ö‚¦‚é
+	*  æ¨™æº–å…¥åŠ›ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 	*
-		clr.w	-(a7)				*  •W€“ü—Í‚ğ
-		DOS	_DUP				*  •¡»‚µ‚½ƒnƒ“ƒhƒ‹‚©‚ç“ü—Í‚µC
+		clr.w	-(a7)				*  æ¨™æº–å…¥åŠ›ã‚’
+		DOS	_DUP				*  è¤‡è£½ã—ãŸãƒãƒ³ãƒ‰ãƒ«ã‹ã‚‰å…¥åŠ›ã—ï¼Œ
 		addq.l	#2,a7
 		move.l	d0,stdin(a6)
 		bmi	start_do_files
 
 		clr.w	-(a7)
-		DOS	_CLOSE				*  •W€“ü—Í‚ÍƒNƒ[ƒY‚·‚éD
-		addq.l	#2,a7				*  ‚±‚¤‚µ‚È‚¢‚Æ ^C ‚â ^S ‚ªŒø‚©‚È‚¢
+		DOS	_CLOSE				*  æ¨™æº–å…¥åŠ›ã¯ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ï¼
+		addq.l	#2,a7				*  ã“ã†ã—ãªã„ã¨ ^C ã‚„ ^S ãŒåŠ¹ã‹ãªã„
 start_do_files:
 	*
-	*  ŠJn
+	*  é–‹å§‹
 	*
 		lea	default_basename(pc),a1
 		subq.l	#1,d7
@@ -269,7 +269,7 @@ do_file_1:
 		clr.l	byte_remain(a6)
 		sf	sjisflag(a6)
 	*
-	*  “ü—Í‚ğtrunc‚·‚×‚«‚©‚Ç‚¤‚©Œˆ’è‚·‚é
+	*  å…¥åŠ›ã‚’truncã™ã¹ãã‹ã©ã†ã‹æ±ºå®šã™ã‚‹
 	*
 		btst	#FLAG_Z,d5
 		sne	ignore_from_ctrlz(a6)
@@ -291,7 +291,7 @@ do_file_1:
 		st	ignore_from_ctrld(a6)
 do_file_2:
 	*
-	*  Å‰‚Ìo—Íƒtƒ@ƒCƒ‹–¼‚ğì¬‚·‚é
+	*  æœ€åˆã®å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½œæˆã™ã‚‹
 	*
 		lea	output_name(a6),a0
 		bsr	stpcpy
@@ -299,11 +299,11 @@ do_file_2:
 		bsr	stpcpy
 		movea.l	a0,a3				*  A3 : bottom of output_name
 	*
-	*  ˆ—ŠJn
+	*  å‡¦ç†é–‹å§‹
 	*
 do_file_loop:
-		moveq	#-1,d2				*  D2.L : o—Íƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‹i-1 == –¢ì¬ ... Å‰‚Ìflush‚Éì¬‚·‚éj
-		move.l	count(a6),d3			*  D3.L : ‘‚«o‚µƒJƒEƒ“ƒg
+		moveq	#-1,d2				*  D2.L : å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ«ï¼ˆ-1 == æœªä½œæˆ ... æœ€åˆã®flushæ™‚ã«ä½œæˆã™ã‚‹ï¼‰
+		move.l	count(a6),d3			*  D3.L : æ›¸ãå‡ºã—ã‚«ã‚¦ãƒ³ãƒˆ
 		btst	#FLAG_byte_unit,d5
 		bne	byte_unit_loop
 ****************
@@ -459,10 +459,10 @@ exit_program:
 		move.l	stdin(a6),d0
 		bmi	exit_program_1
 
-		clr.w	-(a7)				*  •W€“ü—Í‚ğ
-		move.w	d0,-(a7)			*  Œ³‚É
-		DOS	_DUP2				*  –ß‚·D
-		DOS	_CLOSE				*  •¡»‚ÍƒNƒ[ƒY‚·‚éD
+		clr.w	-(a7)				*  æ¨™æº–å…¥åŠ›ã‚’
+		move.w	d0,-(a7)			*  å…ƒã«
+		DOS	_DUP2				*  æˆ»ã™ï¼
+		DOS	_CLOSE				*  è¤‡è£½ã¯ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ï¼
 exit_program_1:
 		move.w	d6,-(a7)
 		DOS	_EXIT2
@@ -507,7 +507,7 @@ write:
 		tst.l	d2
 		bpl	write_1
 
-		*  1‰ñ–Ú‚Ìwrite ... ƒtƒ@ƒCƒ‹‚ğì¬‚·‚é
+		*  1å›ç›®ã®write ... ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã™ã‚‹
 
 			lea	output_name(a6),a0
 			move.w	#$20,-(a7)
@@ -538,7 +538,7 @@ create_1:
 			DOS	_PRINT
 			addq.l	#4,a7
 write_1:
-		*  ‘‚«o‚·
+		*  æ›¸ãå‡ºã™
 		move.l	data_top(a6),-(a7)
 		move.w	d2,-(a7)
 		DOS	_WRITE
@@ -679,21 +679,21 @@ malloc:
 	dc.b	'## split 1.1 ##  Copyright(C)1993-94 by Itagaki Fumihiko',0
 
 msg_myname:			dc.b	'split: ',0
-msg_dos_version_mismatch:	dc.b	'ƒo[ƒWƒ‡ƒ“2.00ˆÈ~‚ÌHuman68k‚ª•K—v‚Å‚·',CR,LF,0
-msg_no_memory:			dc.b	'ƒƒ‚ƒŠ‚ª‘«‚è‚Ü‚¹‚ñ',CR,LF,0
-msg_too_many_outputs:		dc.b	'o—Íƒtƒ@ƒCƒ‹”‚ª‘½‰ß‚¬‚Ü‚·',CR,LF,0
-msg_open_fail:			dc.b	': ƒI[ƒvƒ“‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_create_fail:		dc.b	': ì¬‚Å‚«‚Ü‚¹‚ñ',CR,LF,0
-msg_file_exists:		dc.b	': ƒtƒ@ƒCƒ‹‚ª‘¶İ‚µ‚Ä‚¢‚Ü‚·',CR,LF,0
-msg_too_long_basename:		dc.b	': o—Íƒx[ƒX–¼‚ª’·‰ß‚¬‚Ü‚·',CR,LF,0
-msg_read_fail:			dc.b	': “ü—ÍƒGƒ‰[',CR,LF,0
-msg_write_fail:			dc.b	': o—ÍƒGƒ‰[',CR,LF,0
-msg_illegal_option:		dc.b	'•s³‚ÈƒIƒvƒVƒ‡ƒ“ -- ',0
-msg_illegal_count:		dc.b	'ƒJƒEƒ“ƒg‚Ìw’è‚ª•s³‚Å‚·',0
-msg_too_many_args:		dc.b	'ˆø”‚ª‘½‰ß‚¬‚Ü‚·',0
-msg_usage:			dc.b	CR,LF,'g—p–@:  split [-clnvZ] [-<N>[ckl]] [--] [ <ƒtƒ@ƒCƒ‹> [<o—Íƒx[ƒX–¼>] ]'
+msg_dos_version_mismatch:	dc.b	'ãƒãƒ¼ã‚¸ãƒ§ãƒ³2.00ä»¥é™ã®Human68kãŒå¿…è¦ã§ã™',CR,LF,0
+msg_no_memory:			dc.b	'ãƒ¡ãƒ¢ãƒªãŒè¶³ã‚Šã¾ã›ã‚“',CR,LF,0
+msg_too_many_outputs:		dc.b	'å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«æ•°ãŒå¤šéãã¾ã™',CR,LF,0
+msg_open_fail:			dc.b	': ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“',CR,LF,0
+msg_create_fail:		dc.b	': ä½œæˆã§ãã¾ã›ã‚“',CR,LF,0
+msg_file_exists:		dc.b	': ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ã¦ã„ã¾ã™',CR,LF,0
+msg_too_long_basename:		dc.b	': å‡ºåŠ›ãƒ™ãƒ¼ã‚¹åãŒé•·éãã¾ã™',CR,LF,0
+msg_read_fail:			dc.b	': å…¥åŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_write_fail:			dc.b	': å‡ºåŠ›ã‚¨ãƒ©ãƒ¼',CR,LF,0
+msg_illegal_option:		dc.b	'ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- ',0
+msg_illegal_count:		dc.b	'ã‚«ã‚¦ãƒ³ãƒˆã®æŒ‡å®šãŒä¸æ­£ã§ã™',0
+msg_too_many_args:		dc.b	'å¼•æ•°ãŒå¤šéãã¾ã™',0
+msg_usage:			dc.b	CR,LF,'ä½¿ç”¨æ³•:  split [-clnvZ] [-<N>[ckl]] [--] [ <ãƒ•ã‚¡ã‚¤ãƒ«> [<å‡ºåŠ›ãƒ™ãƒ¼ã‚¹å>] ]'
 msg_newline:			dc.b	CR,LF,0
-msg_stdin:			dc.b	'- •W€“ü—Í -',0
+msg_stdin:			dc.b	'- æ¨™æº–å…¥åŠ› -',0
 default_basename:		dc.b	'x',0
 str_dot000:			dc.b	'.000',0
 *****************************************************************

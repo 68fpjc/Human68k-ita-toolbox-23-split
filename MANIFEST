@@ -1,6 +1,6 @@
-MANIFEST       ���̃t�@�C��
-README         �܂��ŏ��ɂ��ǂ݉�����
-NOTICE         �Ō��Ƌ����ɂ��Ă̍�����
-CHANGES        split�̃��f���`�F���W�̗���
-split.1        split�̃}�j���A��
-split.x        split���s�t�@�C��
+MANIFEST       このファイル
+README         まず最初にお読み下さい
+NOTICE         版権と許諾についての告示書
+CHANGES        splitのモデルチェンジの履歴
+split.1        splitのマニュアル
+split.x        split実行ファイル
